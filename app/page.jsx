@@ -1,10 +1,10 @@
 const Home = () => {
   return (
-    <section className="w-full">
+    <section className="max-w-2xl">
       <h1 className="mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
         Share & Explore
         <br />
-        <span className="bg-gradient-to-r from-blue-500 to-yellow-400 bg-clip-text text-transparent text-center">
+        <span className="bg-gradient-to-r from-blue-500 via-amber-300 to-yellow-400 bg-clip-text text-transparent text-center">
           Welcome to TripSnap!
         </span>
       </h1>
