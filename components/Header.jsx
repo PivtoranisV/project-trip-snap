@@ -69,7 +69,7 @@ const Header = () => {
                 Menu
               </h2>
               {toggle && (
-                <div className="absolute right-5 top mt-1 px-6 py-2 rounded-lg bg-gradient-to-r from-blue-400 to-yellow-300 flex flex-col gap-2 justify-end items-end drop-shadow-2xl">
+                <div className="absolute right-5 top mt-1 px-6 py-2 rounded-lg shadow-2xl flex flex-col gap-2 justify-end items-end">
                   <Link
                     href="/explore"
                     className="text-sm font-inter text-neutral-700 hover:text-neutral-400 font-medium"
@@ -79,12 +79,14 @@ const Header = () => {
                   <Link
                     href="/share"
                     className="text-sm font-inter text-neutral-700 hover:text-neutral-400 font-medium"
+                    onClick={() => setToggle(false)}
                   >
                     Share
                   </Link>
                   <button
                     type="button"
                     className="text-sm font-inter text-neutral-700 font-medium transition-all hover:text-white"
+                    onClick={() => setToggle(false)}
                   >
                     Sign Out
                   </button>
