@@ -37,29 +37,37 @@ const Header = () => {
           </p>
         </Link>
         {/* Desktop navigation  */}
-        <div className="sm:flex hidden items-center">
+        <div className="sm:flex flex-col items-end gap-3 hidden">
           {session?.user ? (
-            <div className="flex items-center gap-3 md:gap-5 ">
-              <Link
-                href="/explore"
-                className="rounded-full border-2 border-neutral-700 bg-neutral-700 py-1.5 px-5 text-white transition-all hover:bg-neutral-100 hover:text-neutral-700 text-center font-inter"
-              >
-                Explore
-              </Link>
-              <Link
-                href="/share"
-                className="rounded-full border-2 border-neutral-700 bg-neutral-700 py-1.5 px-5 text-white transition-all hover:bg-neutral-100 hover:text-neutral-700 text-center font-inter"
-              >
-                Share
-              </Link>
-              <button
-                type="button"
-                className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
-                onClick={signOut}
-              >
-                Sign Out
-              </button>
-            </div>
+            <>
+              <p className="text-neutral-700 text-xl">
+                Welcome{' '}
+                <span className="italic font-semibold text-gray-500">
+                  {session.user.name}
+                </span>
+              </p>
+              <div className="flex items-center gap-3 md:gap-5 ">
+                <Link
+                  href="/explore"
+                  className="rounded-full border-2 border-neutral-700 bg-neutral-700 py-1.5 px-5 text-white transition-all hover:bg-neutral-100 hover:text-neutral-700 text-center font-inter"
+                >
+                  Explore
+                </Link>
+                <Link
+                  href="/share"
+                  className="rounded-full border-2 border-neutral-700 bg-neutral-700 py-1.5 px-5 text-white transition-all hover:bg-neutral-100 hover:text-neutral-700 text-center font-inter"
+                >
+                  Share
+                </Link>
+                <button
+                  type="button"
+                  className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
+                  onClick={signOut}
+                >
+                  Sign Out
+                </button>
+              </div>
+            </>
           ) : (
             <>
               {providers &&
@@ -67,7 +75,7 @@ const Header = () => {
                   <button
                     key={provider.name}
                     type="button"
-                    className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
+                    className="rounded-full border-2 border-neutral-700 bg-neutral-100 mt-4 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
                     onClick={() => signIn(provider.id)}
                   >
                     Sign In
@@ -80,12 +88,14 @@ const Header = () => {
         <div className="sm:hidden flex items-center">
           {session?.user ? (
             <div>
-              <h2
-                className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
+              <Image
+                src={session.user.image}
+                alt="profile image"
+                width={45}
+                height={45}
+                className="object-contain rounded-full cursor-pointer"
                 onClick={handleMenu}
-              >
-                Menu
-              </h2>
+              />
               {toggle && (
                 <div className="absolute right-5 top mt-1 px-6 py-2 rounded-lg shadow-2xl flex flex-col gap-2 justify-end items-end">
                   <Link
@@ -104,7 +114,10 @@ const Header = () => {
                   <button
                     type="button"
                     className="text-sm font-inter text-neutral-700 font-medium transition-all hover:text-white"
-                    onClick={() => setToggle(false)}
+                    onClick={() => {
+                      setToggle(false);
+                      signOut();
+                    }}
                   >
                     Sign Out
                   </button>
@@ -115,6 +128,7 @@ const Header = () => {
             <button
               type="button"
               className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
+              onClick={() => signIn(providers.id)}
             >
               Sign In
             </button>
