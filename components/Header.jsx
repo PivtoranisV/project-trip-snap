@@ -1,16 +1,26 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Header = () => {
+  const [providers, setProviders] = useState(null);
   const [toggle, setToggle] = useState(false);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const loadProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    };
+    loadProviders();
+  }, []);
 
   const handleMenu = () => {
     setToggle((prev) => !prev);
   };
 
-  const isLoggedIn = true;
   return (
     <header className="w-full mb-16 pt-3 px-6 sm:px-16">
       <nav className="flex justify-between">
@@ -28,7 +38,7 @@ const Header = () => {
         </Link>
         {/* Desktop navigation  */}
         <div className="sm:flex hidden items-center">
-          {isLoggedIn ? (
+          {session?.user ? (
             <div className="flex items-center gap-3 md:gap-5 ">
               <Link
                 href="/explore"
@@ -45,22 +55,30 @@ const Header = () => {
               <button
                 type="button"
                 className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
+                onClick={signOut}
               >
                 Sign Out
               </button>
             </div>
           ) : (
-            <button
-              type="button"
-              className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
-            >
-              Sign In
-            </button>
+            <>
+              {providers &&
+                Object.values(providers).map((provider) => (
+                  <button
+                    key={provider.name}
+                    type="button"
+                    className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
+                    onClick={() => signIn(provider.id)}
+                  >
+                    Sign In
+                  </button>
+                ))}
+            </>
           )}
         </div>
         {/* Mobile Navigation */}
         <div className="sm:hidden flex items-center">
-          {isLoggedIn ? (
+          {session?.user ? (
             <div>
               <h2
                 className="rounded-full border-2 border-neutral-700 bg-neutral-100 py-1.5 px-5 text-neutral-700 transition-all hover:bg-neutral-700 hover:text-white text-center font-inter"
