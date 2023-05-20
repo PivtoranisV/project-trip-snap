@@ -10,33 +10,38 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  async session({ session }) {
-    const sessionUser = await User.findOne({
-      email: session.user.email,
-    });
 
-    session.user.id = sessionUser._id.toString();
-  },
-  async signIn({ profile }) {
-    try {
-      await connectDB();
+  callbacks: {
+    async session({ session }) {
+      const sessionUser = await User.findOne({
+        email: session.user.email,
+      });
 
-      //if user already exists
-      const userExists = await User.findOne({ email: profile.email });
+      session.user.id = sessionUser._id.toString();
+      return session;
+    },
 
-      //if not, create new user
-      if (!userExists) {
-        await User.create({
-          email: profile.email,
-          username: profile.name.replace(' ', '').toLowerCase(),
-          image: profile.picture,
-        });
+    async signIn({ profile }) {
+      try {
+        await connectDB();
+
+        //if user already exists
+        const userExists = await User.findOne({ email: profile.email });
+
+        //if not, create new user
+        if (!userExists) {
+          await User.create({
+            email: profile.email,
+            username: profile.name.replace(' ', '').toLowerCase(),
+            image: profile.picture,
+          });
+        }
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
       }
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    },
   },
 });
 

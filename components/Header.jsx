@@ -38,10 +38,10 @@ const Header = () => {
         </Link>
         {/* Desktop navigation  */}
         <div className="sm:flex flex-col items-end gap-3 hidden">
-          {session?.user ? (
+          {session ? (
             <>
               <p className="text-neutral-700 text-xl">
-                Welcome{' '}
+                Welcome,{' '}
                 <span className="italic font-semibold text-gray-500">
                   {session.user.name}
                 </span>
@@ -86,7 +86,7 @@ const Header = () => {
         </div>
         {/* Mobile Navigation */}
         <div className="sm:hidden flex items-center">
-          {session?.user ? (
+          {session ? (
             <div>
               <Image
                 src={session.user.image}
