@@ -1,4 +1,4 @@
-import React from 'react';
+import Form from '@components/Form';
 
 const NewTrip = () => {
   return (
@@ -17,6 +17,7 @@ const NewTrip = () => {
         the wanderlust in others and encourage them to create their own
         unforgettable memories.
       </p>
+      <Form />
     </section>
   );
 };
