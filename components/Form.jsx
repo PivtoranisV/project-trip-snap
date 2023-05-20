@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Form = () => {
@@ -51,7 +52,7 @@ const Form = () => {
           htmlFor="hotel"
           className="font-satoshi font-semibold text-base text-gray-700"
         >
-          Place where you stay
+          Place where you stayed
         </label>
         <input
           type="text"
@@ -66,7 +67,7 @@ const Form = () => {
           htmlFor="description"
           className="font-satoshi font-semibold text-base text-gray-700"
         >
-          Description
+          Memorable details of your Trip
         </label>
         <textarea
           name="description"
@@ -74,6 +75,20 @@ const Form = () => {
           id="description"
           className="w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0"
         ></textarea>
+      </div>
+      <div className="mx-3 mb-5 flex justify-end items-center gap-4">
+        <Link
+          href="/"
+          className="text-gray-600 text-sm shadow-xl p-1.5 rounded-lg"
+        >
+          Cancel
+        </Link>
+        <button
+          type="submit"
+          className="text-gray-600 text-sm shadow-xl px-5 py-1.5 rounded-lg bg-gradient-to-r from-blue-400/50 hover:from-yellow-400/50"
+        >
+          Share
+        </button>
       </div>
     </form>
   );
