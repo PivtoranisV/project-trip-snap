@@ -1,6 +1,26 @@
+'use client';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 import Form from '@components/Form';
 
 const NewTrip = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const { data: session } = useSession();
+
+  const addTripHandler = async (userInput) => {
+    setSubmitting(true);
+    try {
+      const response = await fetch('/api/trip/new', {
+        method: 'POST',
+        body: JSON.stringify({ ...userInput, userId: session?.user.id }),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section className="flex flex-col">
       <h1 className="mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
@@ -17,7 +37,7 @@ const NewTrip = () => {
         the wanderlust in others and encourage them to create their own
         unforgettable memories.
       </p>
-      <Form />
+      <Form onAddTrip={addTripHandler} submitting={submitting} />
     </section>
   );
 };

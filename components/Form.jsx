@@ -1,9 +1,36 @@
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 
-const Form = () => {
+const Form = ({ onAddTrip, submitting }) => {
+  const router = useRouter();
+
+  const titleRef = useRef();
+  const countryRef = useRef();
+  const dateRef = useRef();
+  const hotelRef = useRef();
+  const detailRef = useRef();
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const tripData = {
+      title: titleRef.current.value,
+      country: countryRef.current.value,
+      date: dateRef.current.value,
+      hotel: hotelRef.current.value,
+      details: detailRef.current.value,
+    };
+
+    onAddTrip(tripData);
+    router.push('/');
+  };
+
   return (
-    <form className="rounded-xl border border-gray-200 bg-sky-300/10 shadow-inner p-5 mt-10 flex flex-col gap-7">
+    <form
+      className="rounded-xl border border-gray-200 bg-sky-300/10 shadow-inner p-5 mt-10 flex flex-col gap-7"
+      onSubmit={submitHandler}
+    >
       <div>
         <label
           htmlFor="title"
@@ -12,6 +39,7 @@ const Form = () => {
           Title
         </label>
         <input
+          ref={titleRef}
           type="text"
           placeholder="Short name of yor trip"
           id="title"
@@ -27,6 +55,7 @@ const Form = () => {
           Country you visited
         </label>
         <input
+          ref={countryRef}
           type="text"
           id="country"
           required
@@ -41,6 +70,7 @@ const Form = () => {
           Date of your trip
         </label>
         <input
+          ref={dateRef}
           type="date"
           id="date"
           required
@@ -55,6 +85,7 @@ const Form = () => {
           Place where you stayed
         </label>
         <input
+          ref={hotelRef}
           type="text"
           placeholder="Hotel, Guesthouse, etc."
           id="hotel"
@@ -70,6 +101,7 @@ const Form = () => {
           Memorable details of your Trip
         </label>
         <textarea
+          ref={detailRef}
           name="description"
           placeholder="Tell us about your trip"
           id="description"
@@ -86,8 +118,9 @@ const Form = () => {
         <button
           type="submit"
           className="text-gray-600 text-sm shadow-xl px-5 py-1.5 rounded-lg bg-gradient-to-r from-blue-400/50 hover:from-yellow-400/50"
+          disabled={submitting}
         >
-          Share
+          {submitting ? 'Sharing' : 'Share'}
         </button>
       </div>
     </form>
