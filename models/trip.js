@@ -21,6 +21,10 @@ const TripSchema = new Schema({
     type: String,
     required: [true, 'Hotel is required'],
   },
+  image: {
+    type: String,
+    required: [true, 'Image is required'],
+  },
   details: {
     type: String,
     required: [true, 'Details are required'],

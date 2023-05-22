@@ -14,6 +14,8 @@ const NewTrip = () => {
         method: 'POST',
         body: JSON.stringify({ ...userInput, userId: session?.user.id }),
       });
+      const trip = await response.json();
+      console.log(JSON.stringify(trip));
     } catch (error) {
       console.log(error);
     } finally {

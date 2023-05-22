@@ -2,7 +2,8 @@ import Trip from '@models/trip';
 import { connectDB } from '@utils/database';
 
 export const POST = async (req) => {
-  const { userId, title, country, date, hotel, details } = await req.json();
+  const { userId, title, country, date, hotel, image, details } =
+    await req.json();
 
   try {
     await connectDB();
@@ -13,6 +14,7 @@ export const POST = async (req) => {
       country,
       date,
       hotel,
+      image,
       details,
     });
     await newTrip.save();
