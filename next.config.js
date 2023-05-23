@@ -6,6 +6,14 @@ const nextConfig = {
   },
   images: {
     domains: ['lh3.googleusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.golivegotravel.nl',
+        port: '',
+        pathname: '/wp-content/**',
+      },
+    ],
   },
   webpack(config) {
     config.experiments = {

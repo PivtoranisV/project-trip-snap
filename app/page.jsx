@@ -1,3 +1,5 @@
+import Explore from '@components/Explore';
+
 const Home = () => {
   return (
     <section className="max-w-2xl">
@@ -16,6 +18,8 @@ const Home = () => {
         trips to peaceful getaways, and inspire others to go on their own
         unforgettable journeys.
       </p>
+
+      <Explore />
     </section>
   );
 };

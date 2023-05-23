@@ -31,7 +31,6 @@ const Form = ({ onAddTrip, submitting }) => {
     };
 
     onAddTrip(tripData);
-    router.push('/');
   };
 
   const uploadImage = async () => {

@@ -42,7 +42,7 @@ const Header = () => {
               </p>
               <div className="flex items-center gap-3 md:gap-5 ">
                 <Link
-                  href="/explore"
+                  href="/"
                   className="rounded-full border-2 border-neutral-700 bg-neutral-700 py-1.5 px-5 text-white transition-all hover:bg-neutral-100 hover:text-neutral-700 text-center font-inter"
                 >
                   Explore
@@ -93,7 +93,7 @@ const Header = () => {
               {toggle && (
                 <div className="absolute right-5 top mt-1 px-6 py-2 rounded-lg shadow-2xl flex flex-col gap-2 justify-end items-end">
                   <Link
-                    href="/explore"
+                    href="/"
                     className="text-sm font-inter text-neutral-700 hover:text-neutral-400 font-medium"
                   >
                     Explore

@@ -1,11 +1,13 @@
 'use client';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import Form from '@components/Form';
 
 const NewTrip = () => {
   const [submitting, setSubmitting] = useState(false);
   const { data: session } = useSession();
+  const router = useRouter();
 
   const addTripHandler = async (userInput) => {
     setSubmitting(true);
@@ -14,8 +16,10 @@ const NewTrip = () => {
         method: 'POST',
         body: JSON.stringify({ ...userInput, userId: session?.user.id }),
       });
-      const trip = await response.json();
-      console.log(JSON.stringify(trip));
+
+      if (response.ok) {
+        router.push('/');
+      }
     } catch (error) {
       console.log(error);
     } finally {
