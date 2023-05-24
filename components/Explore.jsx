@@ -1,35 +1,25 @@
-import React from 'react';
+'use client';
+import { useState, useEffect } from 'react';
 import TripList from './TripList';
 import Search from './Search';
 
-const DUMMY_TRIPS = [
-  {
-    traveler: 't1',
-    image:
-      'https://www.golivegotravel.nl/wp-content/uploads/2020/05/Virmenska-Lviv.jpeg',
-    title: 'A First Trip',
-    country: 'Ukraine',
-    date: '12.12.2020',
-    hotel: 'Home',
-    details: 'This is first trip!',
-  },
-  {
-    traveler: 't2',
-    image:
-      'https://www.golivegotravel.nl/wp-content/uploads/2020/05/Virmenska-Lviv.jpeg',
-    title: 'A Second Trip',
-    country: 'Poland',
-    date: '12.12.2020',
-    hotel: 'Home',
-    details: 'This is second trip!',
-  },
-];
-
 const Explore = () => {
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    const fetchTrips = async () => {
+      const response = await fetch('/api/trip');
+      const data = await response.json();
+      setTrips(data);
+    };
+    fetchTrips();
+  }, []);
+
+  console.log(trips);
   return (
-    <section className="mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2">
+    <section className="mt-16 mx-auto w-full max-w-7xl flex justify-center items-center flex-col gap-2">
       <Search />
-      <TripList data={DUMMY_TRIPS} />
+      <TripList data={trips} />
     </section>
   );
 };

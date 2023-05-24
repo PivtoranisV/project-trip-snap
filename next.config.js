@@ -9,9 +9,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.golivegotravel.nl',
-        port: '',
-        pathname: '/wp-content/**',
+        hostname: 'res.cloudinary.com/**',
       },
     ],
   },
