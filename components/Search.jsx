@@ -7,7 +7,7 @@ const Search = () => {
     setSearchText(event.target.value);
   };
   return (
-    <form className="w-full">
+    <form className="w-full max-w-xl">
       <input
         type="text"
         placeholder="Search for a Country or Username"

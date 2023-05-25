@@ -3,7 +3,7 @@ import React from 'react';
 
 const Trip = ({ trip }) => {
   return (
-    <div className="rounded-lg border border-gray-300 bg-white/20 p-6 pb-4 md:w-[360px] w-[300px] h-fit">
+    <div className="rounded-lg border border-gray-300 bg-white/20 p-6 pb-4 h-fit">
       <div className="flex flex-col gap-5 h-full">
         <div className="flex gap-3 cursor-pointer">
           <Image
