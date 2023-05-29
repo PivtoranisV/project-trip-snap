@@ -8,7 +8,7 @@ const Trip = ({ trip }) => {
         <div className="flex gap-3 cursor-pointer">
           <Image
             src={trip.traveler.image}
-            alt="user_image"
+            alt="user image"
             width={44}
             height={44}
             className="rounded-full object-contain"
