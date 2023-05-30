@@ -17,7 +17,6 @@ const Explore = () => {
     fetchTrips();
   }, []);
 
-  console.log(trips);
   return (
     <section className="mt-16 mx-auto w-full max-w-7xl flex justify-center items-center flex-col gap-2">
       {session ? (
