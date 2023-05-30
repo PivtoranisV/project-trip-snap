@@ -6,10 +6,10 @@ const Trip = ({ trip }) => {
   return (
     <Link
       href={`/detailTrip/${trip._id}`}
-      className="rounded-lg border border-gray-300 bg-white/20 p-6 pb-4 h-fit cursor-pointer"
+      className="rounded-lg border border-gray-300 bg-white/20 pb-4 h-fit cursor-pointer"
     >
       <div className="flex flex-col gap-5 h-full">
-        <div className="flex gap-3">
+        <div className="flex gap-3 px-4 pt-4">
           <Image
             src={trip.traveler.image}
             alt="user image"
