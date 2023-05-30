@@ -1,4 +1,5 @@
 import Explore from '@components/Explore';
+import { Suspense } from 'react';
 
 const Home = () => {
   return (
@@ -20,8 +21,15 @@ const Home = () => {
           unforgettable journeys.
         </p>
       </div>
-
-      <Explore />
+      <Suspense
+        fallback={
+          <p className="mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
+            Loading...
+          </p>
+        }
+      >
+        <Explore />
+      </Suspense>
     </section>
   );
 };
