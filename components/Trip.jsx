@@ -1,11 +1,15 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Trip = ({ trip }) => {
   return (
-    <div className="rounded-lg border border-gray-300 bg-white/20 p-6 pb-4 h-fit">
+    <Link
+      href={`/detailTrip/${trip._id}`}
+      className="rounded-lg border border-gray-300 bg-white/20 p-6 pb-4 h-fit cursor-pointer"
+    >
       <div className="flex flex-col gap-5 h-full">
-        <div className="flex gap-3 cursor-pointer">
+        <div className="flex gap-3">
           <Image
             src={trip.traveler.image}
             alt="user image"
@@ -36,7 +40,7 @@ const Trip = ({ trip }) => {
           {trip.country}
         </h3>
       </div>
-    </div>
+    </Link>
   );
 };
 
