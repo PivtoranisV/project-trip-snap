@@ -5,7 +5,7 @@ import Form from '@components/Form';
 
 const UpdateTrip = ({ params }) => {
   const [submitting, setSubmitting] = useState(false);
-  const [trip, setTrip] = useState('');
+  const [trip, setTrip] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,6 +16,7 @@ const UpdateTrip = ({ params }) => {
     };
     fetchTrip();
   }, [params?._id]);
+  console.log(trip);
 
   const addTripHandler = async (userInput) => {
     // setSubmitting(true);
@@ -41,7 +42,7 @@ const UpdateTrip = ({ params }) => {
           Update Your Trip
         </span>
       </h1>
-      <Form onAddTrip={addTripHandler} submitting={submitting} />
+      <Form onAddTrip={addTripHandler} submitting={submitting} trip={trip} />
     </section>
   );
 };

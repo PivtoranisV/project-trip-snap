@@ -62,7 +62,7 @@ const DetailTrip = ({ trip, handleEdit, handleDelete }) => {
               alt={trip?.country}
               className="object-contain shadow-2xl"
             />
-            <p className="text-lg text-gray-500 sm:text-xl lg:text-2xl max-w-2xl px-4">
+            <p className="text-lg text-gray-500 sm:text-xl lg:text-2xl px-4">
               {trip?.details}
             </p>
           </div>

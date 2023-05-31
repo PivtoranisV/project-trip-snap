@@ -28,13 +28,13 @@ const NewTrip = () => {
   };
 
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col max-w-2xl mx-auto">
       <h1 className="mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
         <span className="bg-gradient-to-r from-blue-500 to-yellow-400 bg-clip-text text-transparent">
           Share Your Trip
         </span>
       </h1>
-      <p className="mt-5 text-lg text-gray-500 sm:text-xl lg:text-2xl max-w-2xl text-center">
+      <p className="mt-5 text-lg text-gray-500 sm:text-xl lg:text-2xl text-center">
         Traveling is all about discovering amazing places, breathtaking views,
         and exciting adventures. We want to hear about your trip and inspire
         other adventurers to embark on their own extraordinary journeys. <br />

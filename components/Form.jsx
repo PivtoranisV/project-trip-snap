@@ -1,34 +1,30 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useRef } from 'react';
 import { AiOutlineFileImage } from 'react-icons/ai';
 
-const Form = ({ onAddTrip, submitting }) => {
+const Form = ({ onAddTrip, submitting, trip }) => {
   const CLOUD_NAME = 'dsjipyfjy';
   const UPLOAD_PRESET = 'trip_snap_project';
 
   const [photo, setPhoto] = useState('');
-  const router = useRouter();
+  const [formData, setFormData] = useState({
+    title: '',
+    country: '',
+    date: '',
+    hotel: '',
+    details: '',
+  });
 
-  const titleRef = useRef();
-  const countryRef = useRef();
-  const dateRef = useRef();
-  const hotelRef = useRef();
-  const detailRef = useRef();
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
     const imageUrl = await uploadImage();
 
-    const tripData = {
-      title: titleRef.current.value,
-      country: countryRef.current.value,
-      date: dateRef.current.value,
-      hotel: hotelRef.current.value,
-      image: imageUrl,
-      details: detailRef.current.value,
-    };
+    const tripData = { ...formData, image: imageUrl };
 
     onAddTrip(tripData);
   };
@@ -68,12 +64,14 @@ const Form = ({ onAddTrip, submitting }) => {
           Title
         </label>
         <input
-          ref={titleRef}
+          name="title"
           type="text"
           placeholder="Short name of yor trip"
           id="title"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
+          value={trip?.title || formData.title}
+          onChange={changeHandler}
         />
       </div>
       <div>
@@ -84,11 +82,13 @@ const Form = ({ onAddTrip, submitting }) => {
           Country you visited
         </label>
         <input
-          ref={countryRef}
+          name="country"
           type="text"
           id="country"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
+          value={trip?.country || formData.country}
+          onChange={changeHandler}
         />
       </div>
       <div>
@@ -99,11 +99,13 @@ const Form = ({ onAddTrip, submitting }) => {
           Date of your trip
         </label>
         <input
-          ref={dateRef}
+          name="date"
           type="date"
           id="date"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
+          value={trip?.date || formData.date}
+          onChange={changeHandler}
         />
       </div>
       <div>
@@ -114,12 +116,14 @@ const Form = ({ onAddTrip, submitting }) => {
           Place where you stayed
         </label>
         <input
-          ref={hotelRef}
+          name="hotel"
           type="text"
           placeholder="Hotel, Guesthouse, etc."
           id="hotel"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
+          value={trip?.hotel || formData.hotel}
+          onChange={changeHandler}
         />
       </div>
       <div>
@@ -131,6 +135,7 @@ const Form = ({ onAddTrip, submitting }) => {
           <AiOutlineFileImage className="w-6 h-6 text-gray-500" />
         </label>
         <input
+          name="image"
           type="file"
           id="image"
           required
@@ -141,18 +146,19 @@ const Form = ({ onAddTrip, submitting }) => {
 
       <div>
         <label
-          htmlFor="description"
+          htmlFor="details"
           className="font-satoshi font-semibold text-base text-gray-700"
         >
           Memorable details of your Trip
         </label>
         <textarea
-          ref={detailRef}
-          name="description"
+          name="details"
           placeholder="Tell us about your trip"
-          id="description"
+          id="details"
           className="w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0"
-        ></textarea>
+          value={trip?.details || formData.details}
+          onChange={changeHandler}
+        />
       </div>
       <div className="mx-3 mb-5 flex justify-end items-center gap-4">
         <Link
