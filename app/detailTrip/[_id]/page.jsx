@@ -9,7 +9,7 @@ const DetailPage = ({ params }) => {
     const fetchTrip = async () => {
       const response = await fetch(`/api/trip/${params._id}`);
       const data = await response.json();
-      setTrip(...data);
+      setTrip(data);
     };
     fetchTrip();
   }, [params?._id]);
