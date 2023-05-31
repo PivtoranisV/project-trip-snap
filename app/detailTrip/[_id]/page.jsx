@@ -1,9 +1,11 @@
 'use client';
 import DetailTrip from '@components/DetailTrip';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const DetailPage = ({ params }) => {
   const [trip, setTrip] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -14,7 +16,18 @@ const DetailPage = ({ params }) => {
     fetchTrip();
   }, [params?._id]);
 
-  return <DetailTrip trip={trip} />;
+  const handleEdit = () => {
+    router.push(`/trip-update/${params._id}`);
+  };
+  const handleDelete = () => {};
+
+  return (
+    <DetailTrip
+      trip={trip}
+      handleDelete={handleDelete}
+      handleEdit={handleEdit}
+    />
+  );
 };
 
 export default DetailPage;

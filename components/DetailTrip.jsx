@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-const DetailTrip = ({ trip }) => {
+const DetailTrip = ({ trip, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
 
   const tripDate = new Date(trip?.date);
@@ -13,6 +13,7 @@ const DetailTrip = ({ trip }) => {
   const month = tripDate.toLocaleString('en-GB', {
     month: 'long',
   });
+
   return (
     <div className="rounded-lg border border-gray-300 bg-white/20 pb-4 h-fit">
       {trip && (
@@ -34,15 +35,17 @@ const DetailTrip = ({ trip }) => {
                 {trip.traveler.email}
               </p>
             </div>
-            {session.user.id === trip.traveler._id && (
+            {session?.user.id === trip.traveler._id && (
               <span className="flex gap-2 sm:gap-6 text-gray-500">
                 <AiOutlineEdit
                   size="2em"
                   className="cursor-pointer hover:text-blue-700"
+                  onClick={handleEdit}
                 />
                 <AiOutlineDelete
                   size="2em"
                   className="cursor-pointer hover:text-blue-700"
+                  onClick={handleDelete}
                 />
               </span>
             )}
