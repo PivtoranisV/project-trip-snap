@@ -70,7 +70,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="title"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={trip?.title || formData.title}
+          value={formData.title || trip?.title}
           onChange={changeHandler}
         />
       </div>
@@ -87,7 +87,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="country"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={trip?.country || formData.country}
+          value={formData.country || trip?.country}
           onChange={changeHandler}
         />
       </div>
@@ -104,7 +104,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="date"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={trip?.date || formData.date}
+          value={formData.date || trip?.date}
           onChange={changeHandler}
         />
       </div>
@@ -122,7 +122,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="hotel"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={trip?.hotel || formData.hotel}
+          value={formData.hotel || trip?.hotel}
           onChange={changeHandler}
         />
       </div>
@@ -156,7 +156,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           placeholder="Tell us about your trip"
           id="details"
           className="w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={trip?.details || formData.details}
+          value={formData.details || trip?.details}
           onChange={changeHandler}
         />
       </div>
