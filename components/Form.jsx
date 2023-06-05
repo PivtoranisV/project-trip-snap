@@ -2,29 +2,28 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineFileImage } from 'react-icons/ai';
 
-const Form = ({ onAddTrip, submitting, trip }) => {
+const Form = ({ onAddTrip, submitting, trip, setTrip }) => {
   const CLOUD_NAME = 'dsjipyfjy';
   const UPLOAD_PRESET = 'trip_snap_project';
 
   const [photo, setPhoto] = useState('');
-  const [formData, setFormData] = useState({
-    title: '',
-    country: '',
-    date: '',
-    hotel: '',
-    details: '',
-  });
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setTrip((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const imageUrl = await uploadImage();
-
-    const tripData = { ...formData, image: imageUrl };
+    let tripData;
+    if (trip.image && !photo) {
+      console.log('run old image');
+      tripData = trip;
+    } else {
+      console.log('run new image');
+      const imageUrl = await uploadImage();
+      tripData = { ...trip, image: imageUrl };
+    }
 
     onAddTrip(tripData);
   };
@@ -70,7 +69,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="title"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={formData.title || trip?.title}
+          value={trip?.title}
           onChange={changeHandler}
         />
       </div>
@@ -87,7 +86,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="country"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={formData.country || trip?.country}
+          value={trip?.country}
           onChange={changeHandler}
         />
       </div>
@@ -104,7 +103,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="date"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={formData.date || trip?.date}
+          value={trip?.date}
           onChange={changeHandler}
         />
       </div>
@@ -122,7 +121,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           id="hotel"
           required
           className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={formData.hotel || trip?.hotel}
+          value={trip?.hotel}
           onChange={changeHandler}
         />
       </div>
@@ -135,10 +134,8 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           <AiOutlineFileImage className="w-6 h-6 text-gray-500" />
         </label>
         <input
-          name="image"
           type="file"
           id="image"
-          required
           className="hidden"
           onChange={(e) => setPhoto(e.target.files[0])}
         />
@@ -156,7 +153,7 @@ const Form = ({ onAddTrip, submitting, trip }) => {
           placeholder="Tell us about your trip"
           id="details"
           className="w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0"
-          value={formData.details || trip?.details}
+          value={trip?.details}
           onChange={changeHandler}
         />
       </div>

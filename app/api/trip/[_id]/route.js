@@ -14,11 +14,18 @@ export const GET = async (req, { params }) => {
 
 export const PATCH = async (req, { params }) => {
   const { title, country, date, hotel, image, details } = await req.json();
+  console.log(title);
+  console.log(country);
+  console.log(date);
+  console.log(hotel);
+  console.log(image);
+  console.log(details);
 
   try {
     await connectDB();
 
     const existingTrip = await Trip.findById(params._id);
+    console.log(existingTrip);
     existingTrip.title = title;
     existingTrip.country = country;
     existingTrip.date = date;
@@ -27,6 +34,7 @@ export const PATCH = async (req, { params }) => {
     existingTrip.details = details;
 
     await existingTrip.save();
+
     return new Response(JSON.stringify(existingTrip), { status: 200 });
   } catch (error) {
     return new Response('Failed to update trip', { status: 500 });

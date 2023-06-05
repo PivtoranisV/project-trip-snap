@@ -5,6 +5,14 @@ import { useRouter } from 'next/navigation';
 import Form from '@components/Form';
 
 const NewTrip = () => {
+  const [trip, setTrip] = useState({
+    title: '',
+    country: '',
+    date: '',
+    hotel: '',
+    details: '',
+  });
+
   const [submitting, setSubmitting] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
@@ -43,7 +51,12 @@ const NewTrip = () => {
         the wanderlust in others and encourage them to create their own
         unforgettable memories.
       </p>
-      <Form onAddTrip={addTripHandler} submitting={submitting} />
+      <Form
+        onAddTrip={addTripHandler}
+        submitting={submitting}
+        trip={trip}
+        setTrip={setTrip}
+      />
     </section>
   );
 };

@@ -5,34 +5,39 @@ import Form from '@components/Form';
 
 const UpdateTrip = ({ params }) => {
   const [submitting, setSubmitting] = useState(false);
-  const [trip, setTrip] = useState(null);
+  const [trip, setTrip] = useState({
+    title: '',
+    country: '',
+    date: '',
+    hotel: '',
+    details: '',
+  });
   const router = useRouter();
 
   useEffect(() => {
     const fetchTrip = async () => {
       const response = await fetch(`/api/trip/${params._id}`);
       const data = await response.json();
-      setTrip(data);
+      setTrip({ ...data, date: data.date.slice(0, 10) });
     };
     fetchTrip();
   }, [params?._id]);
-  console.log(trip);
 
-  const addTripHandler = async (userInput) => {
-    // setSubmitting(true);
-    // try {
-    //   const response = await fetch('/api/trip/new', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ ...userInput, userId: session?.user.id }),
-    //   });
-    //   if (response.ok) {
-    //     router.push('/');
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setSubmitting(false);
-    // }
+  const updateTripHandler = async (userInput) => {
+    setSubmitting(true);
+    try {
+      const response = await fetch(`/api/trip/${params._id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(userInput),
+      });
+      if (response.ok) {
+        router.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -42,7 +47,12 @@ const UpdateTrip = ({ params }) => {
           Update Your Trip
         </span>
       </h1>
-      <Form onAddTrip={addTripHandler} submitting={submitting} trip={trip} />
+      <Form
+        onAddTrip={updateTripHandler}
+        submitting={submitting}
+        trip={trip}
+        setTrip={setTrip}
+      />
     </section>
   );
 };
