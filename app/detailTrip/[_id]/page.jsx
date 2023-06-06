@@ -19,7 +19,22 @@ const DetailPage = ({ params }) => {
   const handleEdit = () => {
     router.push(`/trip-update/${params._id}`);
   };
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    const hasConfirm = confirm('Are you sure you want to delete this Trip?');
+
+    if (hasConfirm) {
+      try {
+        const response = await fetch(`/api/trip/${params._id}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          router.push('/');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <DetailTrip
