@@ -74,7 +74,7 @@ const DetailTrip = ({ trip, handleEdit, handleDelete }) => {
               </span>
             </p>
             <p>
-              I stay in{' '}
+              I stay at{' '}
               <span className="font-satoshi font-semibold text-gray-900">
                 {trip.hotel}
               </span>

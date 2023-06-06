@@ -25,7 +25,13 @@ const Header = () => {
     <header className="w-full mb-16 pt-3 px-6 sm:px-16">
       <nav className="flex justify-between">
         <Link href="/" className="flex gap-2 items-center">
-          <Image src="/logo2.png" alt="tripSnap Logo" width={80} height={80} />
+          <Image
+            src="/logo2.png"
+            alt="tripSnap Logo"
+            width={80}
+            height={80}
+            className="w-auto"
+          />
           <p className="max-sm:hidden font-satoshi font-semibold text-3xl bg-gradient-to-r from-yellow-400 via-amber-300 to-blue-500 bg-clip-text text-transparent tracking-wide">
             TripSnap
           </p>

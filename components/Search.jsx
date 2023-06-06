@@ -1,8 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-const Search = () => {
-  const [searchText, setSearchText] = useState('');
+const Search = ({ searchText, setSearchText }) => {
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
   };
@@ -10,7 +9,7 @@ const Search = () => {
     <form className="w-full max-w-xl">
       <input
         type="text"
-        placeholder="Search for a Country or Username"
+        placeholder="Search for a Country"
         value={searchText}
         required
         onChange={handleSearchChange}
