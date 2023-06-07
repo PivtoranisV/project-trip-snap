@@ -49,6 +49,7 @@ const UpdateTrip = ({ params }) => {
       <Form
         onAddTrip={updateTripHandler}
         submitting={submitting}
+        setSubmitting={setSubmitting}
         trip={trip}
         setTrip={setTrip}
       />
