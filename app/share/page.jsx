@@ -18,7 +18,6 @@ const NewTrip = () => {
   const router = useRouter();
 
   const addTripHandler = async (userInput) => {
-    setSubmitting(true);
     try {
       const response = await fetch('/api/trip/new', {
         method: 'POST',
@@ -54,6 +53,7 @@ const NewTrip = () => {
       <Form
         onAddTrip={addTripHandler}
         submitting={submitting}
+        setSubmitting={setSubmitting}
         trip={trip}
         setTrip={setTrip}
       />

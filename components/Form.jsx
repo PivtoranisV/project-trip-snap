@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineFileImage } from 'react-icons/ai';
 
-const Form = ({ onAddTrip, submitting, trip, setTrip }) => {
+const Form = ({ onAddTrip, submitting, setSubmitting, trip, setTrip }) => {
   const CLOUD_NAME = 'dsjipyfjy';
   const UPLOAD_PRESET = 'trip_snap_project';
 
@@ -15,6 +15,7 @@ const Form = ({ onAddTrip, submitting, trip, setTrip }) => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    setSubmitting(true);
     let tripData;
     if (trip.image && !photo) {
       console.log('run old image');

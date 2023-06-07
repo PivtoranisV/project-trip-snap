@@ -13,7 +13,7 @@ const Explore = () => {
     const fetchTrips = async () => {
       const response = await fetch('/api/trip');
       const data = await response.json();
-      setTrips(data);
+      setTrips(data.reverse());
     };
     fetchTrips();
   }, []);

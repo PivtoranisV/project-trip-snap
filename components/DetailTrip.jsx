@@ -60,7 +60,7 @@ const DetailTrip = ({ trip, handleEdit, handleDelete }) => {
               width={850}
               height={850}
               alt={trip?.country}
-              className="object-contain shadow-2xl"
+              className="object-contain shadow-2xl w-auto"
             />
             <p className="text-lg text-gray-500 sm:text-xl lg:text-2xl px-4">
               {trip?.details}

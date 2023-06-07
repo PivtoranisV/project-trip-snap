@@ -33,7 +33,7 @@ const Trip = ({ trip }) => {
             width={250}
             height={250}
             alt={trip.country}
-            className="object-contain shadow-2xl w-auto"
+            className="object-cover shadow-2xl w-auto h-64"
           />
         </div>
         <h3 className="bg-gradient-to-r from-sky-500 to-yellow-400 bg-clip-text text-transparent text-center text-4xl font-extrabold">
