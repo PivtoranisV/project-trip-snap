@@ -18,10 +18,8 @@ const Form = ({ onAddTrip, submitting, setSubmitting, trip, setTrip }) => {
     setSubmitting(true);
     let tripData;
     if (trip.image && !photo) {
-      console.log('run old image');
       tripData = trip;
     } else {
-      console.log('run new image');
       const imageUrl = await uploadImage();
       tripData = { ...trip, image: imageUrl };
     }

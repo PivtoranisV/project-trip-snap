@@ -24,7 +24,6 @@ const UpdateTrip = ({ params }) => {
   }, [params?._id]);
 
   const updateTripHandler = async (userInput) => {
-    setSubmitting(true);
     try {
       const response = await fetch(`/api/trip/${params._id}`, {
         method: 'PATCH',
