@@ -28,8 +28,8 @@ const Header = () => {
           <Image
             src="/logo2.png"
             alt="tripSnap Logo"
-            width={80}
-            height={80}
+            width={65}
+            height={65}
             className="w-auto"
           />
           <p className="max-sm:hidden font-satoshi font-semibold text-3xl bg-gradient-to-r from-yellow-400 via-amber-300 to-blue-500 bg-clip-text text-transparent tracking-wide">
